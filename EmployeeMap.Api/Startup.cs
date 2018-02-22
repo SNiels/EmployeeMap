@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeMap.Data;
+using EmployeeMap.Data.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,10 @@ namespace EmployeeMap.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var configuration = new Configuration();
+            services.AddSingleton<IDatabaseConfiguration>(configuration);
+            services.AddDbContext<EmployeeMapContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
