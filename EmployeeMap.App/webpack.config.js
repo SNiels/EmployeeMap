@@ -9,14 +9,14 @@ module.exports = (env) => {
     const sharedConfig = {
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: [ '.js', '.ts' ] },
+        resolve: { extensions: [ '.js', '.ts', '.d.ts' ] },
         output: {
             filename: '[name].js',
             publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
         },
         module: {
             rules: [
-                { test: /\.ts$/, include: /ClientApp/, use: ['awesome-typescript-loader?silent=true'] },
+                { test: /\.ts|\d.ts$/, use: ['awesome-typescript-loader?silent=true'] },
                 { test: /\.html$/, use: 'html-loader?minimize=false' },
                 { test: /\.css$/, use: [ 'to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
@@ -32,7 +32,7 @@ module.exports = (env) => {
     // Configuration for client-side bundle suitable for running in browsers
     const clientBundleOutputDir = './wwwroot/dist';
     const clientBundleConfig = merge(sharedConfig, {
-        entry: { 'main': './src/app.ts' },
+        entry: { 'main': ['whatwg-fetch', './src/app.ts'] },
         output: { path: path.join(__dirname, clientBundleOutputDir) },
         plugins: isDevBuild ? [
             // Plugins that apply in development builds only
@@ -45,7 +45,6 @@ module.exports = (env) => {
             new webpack.optimize.UglifyJsPlugin()
         ]
     });
-
 
     return clientBundleConfig;
 };

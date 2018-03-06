@@ -21,6 +21,27 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="src\api\AreasService.ts">
+      <CustomToolNamespace>..\EmployeeMap.Api\Controllers\AreasController.cs</CustomToolNamespace>
+    </None>
+    <None Update="src\api\EmployeesService.ts">
+      <CustomToolNamespace>..\EmployeeMap.Api\Controllers\EmployeesController.cs</CustomToolNamespace>
+    </None>
+    <None Update="src\models\Area.d.ts">
+      <CustomToolNamespace>..\EmployeeMap.Data\Models\Area.cs</CustomToolNamespace>
+    </None>
+    <None Update="src\models\Employee.d.ts">
+      <CustomToolNamespace>..\EmployeeMap.Data\Models\Employee.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="if $(ConfigurationName) ==Release (&#xD;&#xA;  npm run-script build&#xD;&#xA;)" />
   </Target>

@@ -1,5 +1,8 @@
-﻿namespace EmployeeMap.Data.Models
+﻿using EmployeeMap.Data.Helpers;
+
+namespace EmployeeMap.Data.Models
 {
+    [ExportToTypeScript]
     public class Employee
     {
         public int Id { get; set; }

@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EmployeeMap.Data;
+﻿using EmployeeMap.Data;
 using EmployeeMap.Data.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace EmployeeMap.Api
 {
     public class Startup
     {
+        public Configuration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = new Configuration(configuration);
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
 
-            var configuration = new Configuration();
-            services.AddSingleton<IDatabaseConfiguration>(configuration);
+            services.AddSingleton<IDatabaseConfiguration>(Configuration);
             services.AddDbContext<EmployeeMapContext>();
         }
 
@@ -39,6 +33,11 @@ namespace EmployeeMap.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder.WithOrigins(Configuration.CorsAllowedDomain)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            );
 
             app.UseMvc();
         }

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using EmployeeMap.Api.Helpers;
 using EmployeeMap.Data.Database;
 using EmployeeMap.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeMap.Api.Controllers
 {
     [Route("api/[controller]")]
+    [ExportToTypeScript]
     public class AreasController : Controller
     {
         private readonly EmployeeMapContext context;
@@ -19,10 +20,9 @@ namespace EmployeeMap.Api.Controllers
 
         // GET api/areas
         [HttpGet]
-        public IEnumerable<Area> Get()
+        public IEnumerable<Area> GetAll()
         {
             return context.Areas
-                .Include(a => a.Employees)
                 .ToList();
         }
 
@@ -31,7 +31,6 @@ namespace EmployeeMap.Api.Controllers
         public Area Get(int id)
         {
             return context.Areas
-                .Include(a => a.Employees)
                 .Single(a => a.Id == id);
         }
 
@@ -49,7 +48,6 @@ namespace EmployeeMap.Api.Controllers
         {
             var dbArea = context.Areas.Single(a => a.Id == id);
             dbArea.Name = area.Name;
-            dbArea.Employees = area.Employees;
             context.SaveChanges();
         }
 

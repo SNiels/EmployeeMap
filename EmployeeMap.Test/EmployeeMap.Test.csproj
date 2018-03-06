@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmployeeMap.Api\EmployeeMap.Api.csproj" />
     <ProjectReference Include="..\EmployeeMap.Data\EmployeeMap.Data.csproj" />
   </ItemGroup>
 

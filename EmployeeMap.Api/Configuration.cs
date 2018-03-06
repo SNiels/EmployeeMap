@@ -1,22 +1,18 @@
 ﻿using EmployeeMap.Data;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace EmployeeMap.Api
 {
     public class Configuration : IDatabaseConfiguration
     {
-        private static IConfigurationRoot configuration;
+        private IConfiguration configuration;
 
         public string ConnectionString => configuration["database:connectionString"];
+        public string CorsAllowedDomain => configuration["cors:allowedDomain"];
 
-        static Configuration()
+        public Configuration(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-
-            configuration = builder.Build();
+            this.configuration = configuration;
         }
     }
 }

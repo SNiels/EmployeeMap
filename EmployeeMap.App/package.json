@@ -10,13 +10,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/js-cookie": "^2.1.0",
     "aspnet-webpack": "^2.0.3",
+    "awesome-typescript-loader": "^3.5.0",
     "extendify": "^1.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "ts-loader": "^3.5.0",
-    "typescript": "^2.7.1",
+    "typescript": "^2.7.2",
     "webpack": "^3.10.0",
     "webpack-hot-middleware": "^2.21.0",
     "webpack-merge": "^4.1.1"
+  },
+  "dependencies": {
+    "js-cookie": "^2.2.0",
+    "whatwg-fetch": "^2.0.3"
   }
 }
