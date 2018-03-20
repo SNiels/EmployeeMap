@@ -29,7 +29,7 @@ export default class EmployeesService {
         return <models.Employee> await response.json();
     }
     
-    public async post(employee: models.Employee) : Promise<void> {
+    public async post(employee: models.Employee) : Promise<models.Employee> {
         let response = await fetch(`${this.apiRoot}Employees`, {
             method: "post", 
             headers: {
@@ -38,10 +38,10 @@ export default class EmployeesService {
             },
             body: JSON.stringify(employee)
         });
-        return <void> await response.json();
+        return <models.Employee> await response.json();
     }
     
-    public async put(id: number, employee: models.Employee) : Promise<void> {
+    public async put(id: number, employee: models.Employee) : Promise<models.Employee> {
         let response = await fetch(`${this.apiRoot}Employees/${id}`, {
             method: "put", 
             headers: {
@@ -50,7 +50,7 @@ export default class EmployeesService {
             },
             body: JSON.stringify(employee)
         });
-        return <void> await response.json();
+        return <models.Employee> await response.json();
     }
     
     public async delete(id: number) : Promise<void> {

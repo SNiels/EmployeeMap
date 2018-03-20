@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,30 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Employee Map</h1>
+    <div class="employees">
+        <ul class="employees-list">
+
+        </ul>
+    </div>
+    <div class="employee-details" style="display: none">
+        <form>
+            <input type="hidden" name="id" />
+            <label>First Name</label>
+            <input name="firstName" />
+            <br />
+            <label>Last Name</label>
+            <input name="lastName" />
+            <br />
+            <label>Area</label>
+            <select name="areaId"></select>
+            <br />
+            <label>Location</label>
+            <input name="location" />
+            <br />
+            <button type="submit">Update</button>
+        </form>
+    </div>
     <script src="/dist/main.js"></script>
 </body>
 </html>
