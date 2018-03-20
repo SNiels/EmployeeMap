@@ -54,14 +54,14 @@ namespace EmployeeMap.Test.Controllers
         [TestMethod]
         public void TestGetAllEmployees()
         {
-            var employees = controller.Get();
+            var employees = controller.GetAll();
             Assert.AreEqual(employees.Count(), 2, "The amount of employees should be 2.");
         }
 
         [TestMethod]
         public void TesChangeAreaForEmployee()
         {
-            var employees = controller.Get();
+            var employees = controller.GetAll();
             var newAreaId = context.Areas.First().Id;
             foreach (var employee in employees)
             {
@@ -69,7 +69,7 @@ namespace EmployeeMap.Test.Controllers
                 controller.Put(employee.Id, employee);
             }
 
-            employees = controller.Get();
+            employees = controller.GetAll();
             foreach(var employee in employees)
             {
                 Assert.AreEqual(employee.AreaId, newAreaId, $"The area id should be {newAreaId}.");
