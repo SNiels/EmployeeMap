@@ -1,0 +1,1 @@
+docker run --env-file run.env employeemap.data:latest

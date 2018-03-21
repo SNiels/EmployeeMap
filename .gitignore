@@ -7,3 +7,9 @@
 bin
 obj
 node_modules
+
+*.env
+!*example.env
+EmployeeMap.App/src/**/*.js
+EmployeeMap.App/src/**/*.js.map
+EmployeeMap.App/wwwroot/dist

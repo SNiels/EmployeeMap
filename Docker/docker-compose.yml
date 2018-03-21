@@ -1,0 +1,22 @@
+version: "3.6"
+services:
+    api:
+        build:
+            context: ./..
+            dockerfile: EmployeeMap.Api/Dockerfile
+        env_file:
+            - .env
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+    db:
+        build:
+            context: ./..
+            dockerfile: EmployeeMap.Data/Dockerfile
+        env_file:
+            - .env
+networks:
+  default:
+    external:
+      name: nat
