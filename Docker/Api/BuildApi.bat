@@ -1,0 +1,1 @@
+docker build -f ../../EmployeeMap.Api/Dockerfile -t employeemap.api:latest ./../..

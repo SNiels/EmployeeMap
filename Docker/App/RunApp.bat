@@ -1,0 +1,1 @@
+docker run employeemap.app:latest

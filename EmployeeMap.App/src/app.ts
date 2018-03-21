@@ -13,13 +13,6 @@ async function main() {
     await loadEmployees(employeeService);
     await loadAreas(areasService);
     (document.querySelector('.employee-details form') as HTMLFormElement).addEventListener('submit', (e) => onEmployeeUpdateClick(e, employeeService));
-    
-    //try {
-    //    employee.areaId = area.id;
-    //    await employeeService.put(employee.id, employee);
-    //} catch (e) {
-    //    console.log(e);
-    //}
 }
 
 async function loadEmployees(employeeService: EmployeeService) {
