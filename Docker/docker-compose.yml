@@ -1,5 +1,14 @@
 version: "3.6"
 services:
+    app:
+        build:
+            context: ./..
+            dockerfile: EmployeeMap.App/Dockerfile
+        depends_on:
+            - api
+        environment:
+            api__root: http://EmployeeApi/api/
+        hostname: EmployeeApp
     api:
         build:
             context: ./..
@@ -10,6 +19,7 @@ services:
             - "8000:80"
         depends_on:
             - db
+        hostname: EmployeeApi
     db:
         build:
             context: ./..
