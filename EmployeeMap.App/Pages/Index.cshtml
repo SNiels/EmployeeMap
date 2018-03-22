@@ -1,0 +1,88 @@
+@page
+@using EmployeeMap.App
+@inject Configuration config
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apiRoot" content="@config.ApiRoot">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>EmployeeMap</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Employee Map</h1>
+                <div class="employees">
+                    <ul class="employees-list">
+
+                    </ul>
+                </div>
+                <div class="employee-details" style="display: none">
+                    <h2>Update employee</h2>
+                    <form>
+                        <input type="hidden" name="id" />
+                        <div class="form-group">
+                            <label for="firstNameUpdateField">First Name</label>
+                            <input name="firstName" class="form-control" id="firstNameUpdateField" placeholder="Enter first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNameUpdateField">First Name</label>
+                            <input name="lastName" class="form-control" id="lastNameUpdateField" placeholder="Enter last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="areaIdUpdateField">Area</label>
+                            <select name="areaId" class="form-control" id="areaIdUpdateField"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="locationUpdateField">Location</label>
+                            <input name="location" class="form-control" id="locationUpdateField" placeholder="Enter location">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h1>Create</h1>
+                <h2>Employee</h2>
+                <div class="employee-create">
+                    <form>
+                        <div class="form-group">
+                            <label for="firstNameCreateField">First Name</label>
+                            <input name="firstName" class="form-control" id="firstNameCreateField" placeholder="Enter first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastNameCreateField">First Name</label>
+                            <input name="lastName" class="form-control" id="lastNameCreateField" placeholder="Enter last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="areaIdCreateField">Area</label>
+                            <select name="areaId" class="form-control" id="areaIdCreateField"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="locationCreateField">Location</label>
+                            <input name="location" class="form-control" id="locationCreateField" placeholder="Enter location">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+                <h2>Area</h2>
+                <div class="area-create">
+                    <form>
+                        <div class="form-group">
+                            <label for="nameAreaCreateField">Area Name</label>
+                            <input name="name" class="form-control" id="nameAreaCreateField" placeholder="Enter name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="/dist/main.js"></script>
+</body>
+</html>

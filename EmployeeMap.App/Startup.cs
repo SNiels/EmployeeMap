@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeMap.App
 {
@@ -20,6 +21,8 @@ namespace EmployeeMap.App
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {   
+            services.AddMvc();
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +36,9 @@ namespace EmployeeMap.App
                 });
             }
 
-            app.Use(async (context, next) =>
+            app.UseMvc();
+
+            /* app.Use(async (context, next) =>
             {
                 await next();
                 if (!Path.HasExtension(context.Request.Path))
@@ -42,7 +47,7 @@ namespace EmployeeMap.App
                 }
                 await next();
                 context.Response.Cookies.Append("X-ApiRoot", Configuration.ApiRoot);
-            });
+            }); */
 
             app.UseStaticFiles();
             app.UseDefaultFiles();

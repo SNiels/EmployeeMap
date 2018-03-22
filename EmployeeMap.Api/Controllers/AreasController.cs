@@ -36,19 +36,21 @@ namespace EmployeeMap.Api.Controllers
 
         // POST api/areas
         [HttpPost]
-        public void Post([FromBody]Area area)
+        public Area Post([FromBody]Area area)
         {
             context.Areas.Add(area);
             context.SaveChanges();
+            return area;
         }
 
         // PUT api/areas/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Area area)
+        public Area Put(int id, [FromBody]Area area)
         {
             var dbArea = context.Areas.Single(a => a.Id == id);
             dbArea.Name = area.Name;
             context.SaveChanges();
+            return dbArea;
         }
 
         // DELETE api/areas/5

@@ -13,7 +13,7 @@ COPY ./EmployeeMap.Api ./EmployeeMap.Api
 COPY ./EmployeeMap.Data ./EmployeeMap.Data
 
 WORKDIR /source/EmployeeMap.Api
-RUN dotnet publish -o ../../publish
+RUN dotnet publish -o ../../publish -c Release
 WORKDIR /publish
 
 ENTRYPOINT ["dotnet", "EmployeeMap.Api.dll"]

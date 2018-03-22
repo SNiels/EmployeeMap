@@ -32,8 +32,8 @@ RUN dotnet restore
 
 COPY ./EmployeeMap.App ./../EmployeeMap.App
 ENV NODE_ENV=production
-RUN npm run-script build-docker
-RUN dotnet publish -o ../../publish
+RUN npm run-script build
+RUN dotnet publish -o ../../publish -c Release
 WORKDIR /publish
 
 ENTRYPOINT ["dotnet", "EmployeeMap.App.dll"]
