@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  employeemap.api:
+    image: employeemapapi
+    build:
+      context: .
+      dockerfile: EmployeeMap.Api\Dockerfile
+
+  employeemap.app:
+    image: employeemapapp
+    build:
+      context: .
+      dockerfile: EmployeeMap.App\Dockerfile

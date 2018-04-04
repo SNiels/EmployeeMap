@@ -1,0 +1,18 @@
+version: '3.6'
+
+services:
+  employeemap.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+  employeemap.app:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+networks:
+  default:
+    external:
+      name: nat
+

@@ -1,19 +1,21 @@
-FROM microsoft/aspnetcore-build:2.0
-
-WORKDIR /source
+FROM microsoft/aspnetcore:2.0-nanoserver-sac2016 AS base
+WORKDIR /app
 EXPOSE 80
 
-COPY ./EmployeeMap.Api/EmployeeMap.Api.csproj ./EmployeeMap.Api/EmployeeMap.Api.csproj
-COPY ./EmployeeMap.Data/EmployeeMap.Data.csproj ./EmployeeMap.Data/EmployeeMap.Data.csproj
-WORKDIR /source/EmployeeMap.Api
-RUN dotnet restore
+FROM microsoft/aspnetcore-build:2.0-nanoserver-sac2016 AS build
+WORKDIR /src
+COPY EmployeeMap.sln ./
+COPY EmployeeMap.Api/EmployeeMap.Api.csproj EmployeeMap.Api/
+COPY EmployeeMap.Data/EmployeeMap.Data.csproj EmployeeMap.Data/
+RUN dotnet restore -nowarn:msb3202,nu1503
+COPY . .
+WORKDIR /src/EmployeeMap.Api
+RUN dotnet build -c Release -o /app
 
-WORKDIR /source
-COPY ./EmployeeMap.Api ./EmployeeMap.Api
-COPY ./EmployeeMap.Data ./EmployeeMap.Data
+FROM build AS publish
+RUN dotnet publish -c Release -o /app
 
-WORKDIR /source/EmployeeMap.Api
-RUN dotnet publish -o ../../publish -c Release
-WORKDIR /publish
-
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "EmployeeMap.Api.dll"]

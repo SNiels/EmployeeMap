@@ -1,39 +1,26 @@
-# escape=`
-FROM microsoft/aspnetcore-build:2.0
-
+FROM microsoft/aspnetcore-build:2.0-nanoserver-sac2016 AS base
+WORKDIR /app
 EXPOSE 80
 
-ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.9.4
-ENV NODE_DOWNLOAD_SHA 48946e99ac4484e071df25741d2300f3a656f476c5ff3f8116a4746c07ebe3b7
-RUN &cmd.exe /c rd /S /Q "${env:ProgramFiles}\nodejs"
-RUN &cmd.exe /c move  "${env:ProgramFiles}\nodejs"  "${env:ProgramFiles}\nodejs.old"
+FROM microsoft/aspnetcore-build:2.0-nanoserver-sac2016 AS build
+WORKDIR /src
+COPY EmployeeMap.sln ./
+COPY EmployeeMap.App/EmployeeMap.App.csproj EmployeeMap.App/
+RUN dotnet restore -nowarn:msb3202,nu1503
 
-# Install node
-RUN Invoke-WebRequest -UseBasicParsing https://nodejs.org/dist/v${env:NODE_VERSION}/node-v${env:NODE_VERSION}-win-x64.zip -outfile node8.zip; `
-    if ((Get-FileHash node8.zip -Algorithm sha256).Hash -ne $env:NODE_DOWNLOAD_SHA) { `
-        Write-Host 'NODEJS CHECKSUM VERIFICATION FAILED!'; `
-        exit 1; `
-    }; `
-    Expand-Archive node8.zip -DestinationPath ${env:TEMP}/node8js-tmp; `
-    Move-Item ${env:TEMP}/node8js-tmp/node-v${env:NODE_VERSION}-win-x64 ${env:ProgramFiles}/nodejs -Force; `
-    Remove-Item -Force node8.zip; `
-    $env:PATH += \";${env:ProgramFiles}\nodejs\";
-
-RUN setx /M PATH $($Env:PATH + ';' + $Env:ProgramFiles + '\nodejs')
-
-WORKDIR /source/EmployeeMap.App
-COPY ./EmployeeMap.App/package.json  ./package.json
-COPY ./EmployeeMap.App/package-lock.json  ./package-lock.json
+COPY EmployeeMap.App/package.json  EmployeeMap.App/
+COPY EmployeeMap.App/package-lock.json  EmployeeMap.App/
+WORKDIR /src/EmployeeMap.App
 RUN npm install
 
-COPY ./EmployeeMap.App/EmployeeMap.App.csproj  ./EmployeeMap.App.csproj
-RUN dotnet restore
+COPY EmployeeMap.App .
+#RUN dotnet build -c Release -o /app
+RUN dotnet publish -c Release -o /app
 
-COPY ./EmployeeMap.App ./../EmployeeMap.App
-ENV NODE_ENV=production
-RUN npm run-script build
-RUN dotnet publish -o ../../publish -c Release
-WORKDIR /publish
-
+FROM base AS final
+WORKDIR /app
+#VOLUME C:/app
+#RUN set-itemproperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' -Name 'G:' -Value '\??\C:\app' -Type String
+COPY --from=build /app .
+#WORKDIR 'G:\\'
 ENTRYPOINT ["dotnet", "EmployeeMap.App.dll"]
