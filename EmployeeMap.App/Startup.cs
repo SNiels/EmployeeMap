@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
-using System.IO;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc;
+using EmployeeMap.App.Extensions;
 
 namespace EmployeeMap.App
 {
@@ -30,6 +29,7 @@ namespace EmployeeMap.App
         {
             if (env.IsDevelopment())
             {
+                env.UseRootNodeModules();
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
                     HotModuleReplacement = true
@@ -37,18 +37,6 @@ namespace EmployeeMap.App
             }
 
             app.UseMvc();
-
-            /* app.Use(async (context, next) =>
-            {
-                await next();
-                if (!Path.HasExtension(context.Request.Path))
-                {
-                    context.Request.Path = "/index.html";
-                }
-                await next();
-                context.Response.Cookies.Append("X-ApiRoot", Configuration.ApiRoot);
-            }); */
-
             app.UseStaticFiles();
             app.UseDefaultFiles();
         }

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Build": {
+      "commandName": "Executable",
+      "executablePath": "powershell",
+      "commandLineArgs": ".\\DebugRun.ps1",
+      "workingDirectory": "."
+    }
+  }
+}
