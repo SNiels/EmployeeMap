@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeMap.Data", "Employe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeMap.Test", "EmployeeMap.Test\EmployeeMap.Test.csproj", "{41D6DD0E-FF64-4605-8911-5B61F58C2F93}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build", "Build\Build.csproj", "{DAD264EF-3EDE-460A-97A6-278AF1167ED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "Build\Build.csproj", "{DAD264EF-3EDE-460A-97A6-278AF1167ED6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,18 +71,6 @@ Global
 		{41D6DD0E-FF64-4605-8911-5B61F58C2F93}.Release|x64.Build.0 = Release|Any CPU
 		{41D6DD0E-FF64-4605-8911-5B61F58C2F93}.Release|x86.ActiveCfg = Release|Any CPU
 		{41D6DD0E-FF64-4605-8911-5B61F58C2F93}.Release|x86.Build.0 = Release|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Debug|x64.Build.0 = Debug|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Debug|x86.Build.0 = Debug|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Release|x64.ActiveCfg = Release|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Release|x64.Build.0 = Release|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Release|x86.ActiveCfg = Release|Any CPU
-		{D26DFEC3-BE0D-4E31-AFA9-4DCEEF032191}.Release|x86.Build.0 = Release|Any CPU
 		{DAD264EF-3EDE-460A-97A6-278AF1167ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DAD264EF-3EDE-460A-97A6-278AF1167ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAD264EF-3EDE-460A-97A6-278AF1167ED6}.Debug|x64.ActiveCfg = Debug|Any CPU

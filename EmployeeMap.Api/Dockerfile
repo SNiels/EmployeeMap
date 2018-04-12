@@ -8,7 +8,8 @@ COPY EmployeeMap.sln ./
 COPY EmployeeMap.Api/EmployeeMap.Api.csproj EmployeeMap.Api/
 COPY EmployeeMap.Data/EmployeeMap.Data.csproj EmployeeMap.Data/
 RUN dotnet restore -nowarn:msb3202,nu1503
-COPY . .
+COPY EmployeeMap.Api EmployeeMap.Api
+COPY EmployeeMap.Data EmployeeMap.Data
 WORKDIR /src/EmployeeMap.Api
 RUN dotnet publish -c Release -o /app
 

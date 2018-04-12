@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EmployeeMap.Api.Helpers;
 using EmployeeMap.Data.Database;
@@ -22,6 +23,7 @@ namespace EmployeeMap.Api.Controllers
         [HttpGet]
         public IEnumerable<Area> GetAll()
         {
+            Console.WriteLine("hi");
             return context.Areas
                 .ToList();
         }

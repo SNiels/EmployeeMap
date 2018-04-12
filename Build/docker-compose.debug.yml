@@ -1,0 +1,62 @@
+version: '3.6'
+
+services:
+  employeemap.api:
+    image: employeemapapi:debug
+
+    ports:
+      - "80"
+      - "4022:4022"
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      - NUGET_FALLBACK_PACKAGES=c:\.nuget\fallbackpackages
+
+    volumes:
+      - C:\Users\nswimberghe\projects\EmployeeMap:C:\FullApp
+      - C:\Users\nswimberghe\onecoremsvsmon\15.0.27428.1:C:\remote_debugger:ro
+      - C:\Users\nswimberghe\.nuget\packages\:c:\.nuget\packages
+      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:c:\.nuget\fallbackpackages
+
+    build:
+      context: ..
+      dockerfile: EmployeeMap.Api\Dockerfile.Debug
+
+    entrypoint: dotnet run --no-launch-profile
+
+    working_dir: \FullApp\employeeMap.Api
+
+  employeemap.app:
+    image: employeemapapp:debug
+
+    ports:
+      - "80"
+      - "4021:4022"
+      - "5001:5001"
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      - NUGET_FALLBACK_PACKAGES=c:\.nuget\fallbackpackages
+
+    volumes:
+      - C:\Users\nswimberghe\projects\EmployeeMap\employeeMap.App:C:\FullApp
+      - C:\Users\nswimberghe\onecoremsvsmon\15.0.27428.1:C:\remote_debugger:ro
+      - C:\Users\nswimberghe\.nuget\packages\:c:\.nuget\packages
+      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:c:\.nuget\fallbackpackages
+
+    build:
+      context: ..
+      dockerfile: EmployeeMap.App\Dockerfile.Debug
+
+    entrypoint: dotnet run --no-launch-profile
+
+    working_dir: G:\\
+
+networks:
+  default:
+    external:
+      name: nat

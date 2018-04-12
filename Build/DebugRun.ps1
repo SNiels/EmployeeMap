@@ -1,4 +1,4 @@
-docker-compose -f "./docker-compose.yml" -f "./docker-compose.override.yml" -f "./docker-compose.vs.debug.g.yml" --no-ansi up -d
+docker-compose -f "./docker-compose.debug.yml" --no-ansi up -d --force-recreate --build
 
 Start-Sleep -Seconds 5
 
@@ -17,11 +17,19 @@ $apiTarget = $apiId + ":4022"
 ./RemoteDebugAttach.exe "EmployeeMap.sln" "Remote (no authentication)" $appTarget "dotnet.exe"
 ./RemoteDebugAttach.exe "EmployeeMap.sln" "Remote (no authentication)" $apiTarget "dotnet.exe"
 
+Write-Host "Api:" $apiIp
+Write-Host "App:" $appIp
+$apiUrl = "http://$apiIp/api/employees"
+$appUrl = "http://$appIp"
+
+start $apiUrl
+start $appUrl
+
 Read-Host "Press any key to quit"
 
 ./RemoteDebugDetach.exe EmployeeMap.sln "dotnet.exe"
 
 docker exec -d $appId C:\\remote_debugger\\x64\\utils\\KillProcess.exe msvsmon.exe
-docker exec -d $appId C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe
 docker exec -d $apiId C:\\remote_debugger\\x64\\utils\\KillProcess.exe msvsmon.exe
-docker exec -d $apiId C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe
+
+docker-compose -f "./docker-compose.debug.yml" --no-ansi down 
