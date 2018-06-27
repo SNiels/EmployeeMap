@@ -1,5 +1,5 @@
 # escape=`
-FROM microsoft/aspnetcore-build:2.0 AS base
+FROM microsoft/aspnetcore-build:2.0 AS build
 
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 8.9.4
@@ -20,11 +20,6 @@ RUN Invoke-WebRequest -UseBasicParsing https://nodejs.org/dist/v${env:NODE_VERSI
 
 RUN setx /M PATH $($Env:PATH + ';' + $Env:ProgramFiles + '\nodejs')
 
-WORKDIR /app
-EXPOSE 80
-
-FROM base AS build
-
 WORKDIR /src
 COPY EmployeeMap.sln ./
 COPY EmployeeMap.App/EmployeeMap.App.csproj EmployeeMap.App/
@@ -38,14 +33,7 @@ RUN npm install
 COPY EmployeeMap.App .
 RUN dotnet publish -c Release -o /app
 
-FROM base AS final
+FROM  microsoft/aspnetcore-build:2.0 AS final
 WORKDIR /app
-
 COPY --from=build /app .
-
-#volumes are broken with Node on windows docker containers, this is work around
-WORKDIR /FullApp 
-RUN set-itemproperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' -Name 'G:' -Value '\??\C:\FullApp' -Type String
-
-WORKDIR C:\\app
 ENTRYPOINT ["dotnet", "EmployeeMap.App.dll"]

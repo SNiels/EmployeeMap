@@ -82,6 +82,7 @@ export async function onAreaCreateClick(e: Event, areasService: AreasService) {
     try {
         await areasService.post(employee);
         alert('Area created!');
+        console.log('Area created!');
     } catch (ex) {
         console.log(ex);
         alert('Area create failed');

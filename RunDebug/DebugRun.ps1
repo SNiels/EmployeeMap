@@ -14,21 +14,26 @@ docker exec -d $apiId C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /si
 $appTarget = $appId + ":4022"
 $apiTarget = $apiId + ":4022"
 
+Write-Host "Api:" $apiIp
+Write-Host "Api: http://employeemapapi"
+Write-Host "App:" $appIp
+Write-Host "App: http://employeemap"
+
+start "http://employeemapapi/api/employees"
+start "http://employeemap"
+
+#make sure app and api is running
+$ignr = Invoke-WebRequest "http://employeemapapi/api/employees" -ErrorAction SilentlyContinue
+$ignr = Invoke-WebRequest "http://employeemap" -ErrorAction SilentlyContinue
+$ignr = $null
+
 #Parameters
 ## 1: Solution Name is used to run the code only to the VS instance that has the Solution open
 ## 2: Transportation method for remote debugger
 ## 3: Target is the hostname/IP/... to the target where remote debugging is running
 ## 4: The process name you want to attach tos
-./RemoteDebugAttach.exe "EmployeeMap.sln" "Remote (no authentication)" $appTarget "dotnet.exe"
-./RemoteDebugAttach.exe "EmployeeMap.sln" "Remote (no authentication)" $apiTarget "dotnet.exe"
-
-Write-Host "Api:" $apiIp
-Write-Host "App:" $appIp
-$apiUrl = "http://$apiIp/api/employees"
-$appUrl = "http://$appIp"
-
-start $apiUrl
-start $appUrl
+./RemoteDebugAttach.exe "EmployeeMap.sln" "Remote (no authentication)" "employeemapapi:4022" "dotnet.exe"
+./RemoteDebugAttach.exe "EmployeeMap.sln" "Remote (no authentication)" "employeemap:4022" "dotnet.exe"
 
 Read-Host "Press any key to quit"
 
