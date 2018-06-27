@@ -23,9 +23,13 @@ start "http://employeemapapi/api/employees"
 start "http://employeemap"
 
 #make sure app and api is running
-$ignr = Invoke-WebRequest "http://employeemapapi/api/employees" -ErrorAction SilentlyContinue
-$ignr = Invoke-WebRequest "http://employeemap" -ErrorAction SilentlyContinue
-$ignr = $null
+Try{
+	$ignr = Invoke-WebRequest "http://employeemapapi/api/employees" -ErrorAction SilentlyContinue
+	$ignr = Invoke-WebRequest "http://employeemap" -ErrorAction SilentlyContinue
+	$ignr = $null
+}Catch{
+
+}
 
 #Parameters
 ## 1: Solution Name is used to run the code only to the VS instance that has the Solution open
