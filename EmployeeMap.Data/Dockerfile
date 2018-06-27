@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build:2.0 as build
+FROM microsoft/dotnet:2.1-sdk as build
 
 COPY ./EmployeeMap.Data/Docker /publish
 

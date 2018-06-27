@@ -1,11 +1,9 @@
 # escape=`
-FROM microsoft/aspnetcore-build:2.0
+FROM microsoft/dotnet:2.1-sdk
 
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 8.9.4
 ENV NODE_DOWNLOAD_SHA 48946e99ac4484e071df25741d2300f3a656f476c5ff3f8116a4746c07ebe3b7
-RUN &cmd.exe /c rd /S /Q "${env:ProgramFiles}\nodejs"
-RUN &cmd.exe /c move  "${env:ProgramFiles}\nodejs"  "${env:ProgramFiles}\nodejs.old"
 
 # Install node
 RUN Invoke-WebRequest -UseBasicParsing https://nodejs.org/dist/v${env:NODE_VERSION}/node-v${env:NODE_VERSION}-win-x64.zip -outfile node8.zip; `
@@ -24,3 +22,4 @@ EXPOSE 80
 #volumes are broken with Node on windows docker containers, this is work around
 WORKDIR /FullApp 
 RUN set-itemproperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices' -Name 'G:' -Value '\??\C:\FullApp' -Type String
+ENV DOTNET_RUNNING_IN_CONTAINER=true
