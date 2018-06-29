@@ -1,5 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>..\build\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>

@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   employeemap.api:
-    image: employeemapapi:debug
+    image: employeemap.api:debug
 
     ports:
       - "80"
@@ -17,13 +17,14 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - NUGET_PACKAGES=C:\.nuget\packages
-      - NUGET_FALLBACK_PACKAGES=c:\.nuget\fallbackpackages
+      - NUGET_FALLBACK_PACKAGES=C:\.nuget\fallbackpackages
 
     volumes:
-      - C:\Users\nswimberghe\projects\EmployeeMap:C:\FullApp
+      - C:\Users\nswimberghe\projects\EmployeeMap\EmployeeMap.Api\:C:\FullApp\EmployeeMap.Api:rw
+      - C:\Users\nswimberghe\projects\EmployeeMap\EmployeeMap.Data\:C:\FullApp\EmployeeMap.Data:rw
       - C:\Users\nswimberghe\onecoremsvsmon\15.0.27428.1:C:\remote_debugger:ro
-      - C:\Users\nswimberghe\.nuget\packages\:c:\.nuget\packages
-      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:c:\.nuget\fallbackpackages
+      - C:\Users\nswimberghe\.nuget\packages\:C:\.nuget\packages
+      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:C:\.nuget\fallbackpackages
 
     build:
       context: ..
@@ -37,7 +38,7 @@ services:
         - db
 
   employeemap.app:
-    image: employeemapapp:debug
+    image: employeemap.app:debug
 
     ports:
       - "80"
@@ -53,13 +54,13 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - NUGET_PACKAGES=C:\.nuget\packages
-      - NUGET_FALLBACK_PACKAGES=c:\.nuget\fallbackpackages
+      - NUGET_FALLBACK_PACKAGES=C:\.nuget\fallbackpackages
 
     volumes:
-      - C:\Users\nswimberghe\projects\EmployeeMap\employeeMap.App:C:\FullApp
+      - C:\Users\nswimberghe\projects\EmployeeMap\employeeMap.App:C:\FullApp:rw
       - C:\Users\nswimberghe\onecoremsvsmon\15.0.27428.1:C:\remote_debugger:ro
-      - C:\Users\nswimberghe\.nuget\packages\:c:\.nuget\packages
-      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:c:\.nuget\fallbackpackages
+      - C:\Users\nswimberghe\.nuget\packages\:C:\.nuget\packages:ro
+      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:C:\.nuget\fallbackpackages
 
     build:
       context: ..

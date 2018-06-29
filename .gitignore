@@ -13,3 +13,5 @@ node_modules
 EmployeeMap.App/src/**/*.js
 EmployeeMap.App/src/**/*.js.map
 EmployeeMap.App/wwwroot/dist
+/EmployeeMap.App/build/EmployeeMap.App/Debug/netcoreapp2.1
+/build

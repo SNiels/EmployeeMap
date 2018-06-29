@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>..\build\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <OutputType>Exe</OutputType>
